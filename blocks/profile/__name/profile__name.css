@@ -1,0 +1,8 @@
+.profile__name{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 0;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+}

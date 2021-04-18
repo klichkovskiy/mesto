@@ -1,0 +1,12 @@
+.profile__add-button{
+  align-self: center;
+  justify-self: end;
+  padding: 0;
+  background: url(../../../image/add-button.svg);
+  width: 150px;
+  height: 50px;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
