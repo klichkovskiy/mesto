@@ -3,8 +3,15 @@
   padding-top: 45px;
 }
 
+@media (max-width: 1000px){
+  .page__header{
+    margin: 0 40px;
+  }
+}
+
 @media (max-width: 600px){
   .page__header{
+    margin: 0;
     min-height: 56px;
     padding-top: 28px;
   }
