@@ -3,11 +3,19 @@
   max-width: 336px;
   align-self: center;
   row-gap: 16px;
+  column-gap: 18px;
 }
 
 @media (max-width: 800px){
   .profile__info{
     justify-self: center;
     margin-top: 26px;
+  }
+}
+
+@media (max-width: 600px){
+  .profile__info{
+    row-gap: 14px;
+    column-gap: 10px;
   }
 }
