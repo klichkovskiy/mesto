@@ -1,0 +1,5 @@
+.card__info{
+  display: grid;
+  grid-template-columns: 190px 52px;
+  margin: 0 20px;
+}

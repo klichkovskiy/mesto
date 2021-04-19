@@ -1,0 +1,8 @@
+.card{
+  background-color: #fff;
+  display: grid;
+  grid-template-rows: 1fr 79px;
+  border-radius: 10px;
+  justify-items: center;
+  align-items: center;
+}
