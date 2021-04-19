@@ -1,12 +1,29 @@
 .profile__edit-button{
-  grid-column-start: 2;
-  grid-column-end: 3;
-  align-self: end;
+  position: absolute;
+  right: 0;
+  bottom: 9px;
   padding: 0;
   background: url(../../../image/edit-button.svg);
+  background-size: contain;
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 800px){
+  .profile__edit-button{
+    right: -42px;
+    bottom: 9px;
+  }
+}
+
+@media (max-width: 600px){
+  .profile__edit-button{
+    right: -28px;
+    bottom: 6px;
+    width: 18px;
+    height: 18px;
+  }
 }

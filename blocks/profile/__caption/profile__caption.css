@@ -1,8 +1,19 @@
 .profile__caption{
-  grid-column-start: 1;
-  grid-column-end: 3;
   margin: 0;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+}
+
+@media (max-width: 800px){
+  .profile__caption{
+    justify-self: center;
+  }
+}
+
+@media (max-width: 600px){
+  .profile__caption{
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

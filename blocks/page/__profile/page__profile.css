@@ -1,3 +1,15 @@
 .page__profile{
   margin-top: 40px;
 }
+
+@media (max-width: 1000px){
+  .page__profile{
+    margin: 40px 40px 0;
+  }
+}
+
+@media (max-width: 800px){
+  .page__profile{
+    margin: 40px 18px 0;
+  }
+}

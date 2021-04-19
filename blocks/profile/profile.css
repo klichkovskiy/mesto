@@ -3,5 +3,16 @@
   color: #fff;
   display: grid;
   grid-auto-flow: column;
-  justify-content: start;
+  grid-template-columns: 120px 336px 1fr;
+  column-gap: 30px;
+}
+
+@media (max-width: 800px){
+  .profile{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "profile__avatar"
+    "profile__info"
+    "profile__add-button";
+  }
 }
