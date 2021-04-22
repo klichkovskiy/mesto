@@ -83,12 +83,27 @@
 
     </main>
 
-    <footer class="footer">
-
+    <footer class="footer page__footer">
+      <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
+
+    <section class="overlay page__overlay">
+      <form action="" class="overlay__form">
+        <button type="button" class="overlay__close"></button>
+        <h2 class="overlay__heading">Редактировать профиль</h2>
+        <fieldset class="overlay__info-name">
+          <input type="text" class="overlay__item overlay__name" value="Жак-Ив Кусто">
+        </fieldset>
+        <fieldset class="overlay__info-caption">
+          <input type="text" class="overlay__item overlay__caption" value="Исследователь океана">
+        </fieldset>
+        <button type="submit" class="overlay__save">Сохранить</button>
+      </form>
+    </section>
 
   </div>
 
+<script src="./scripts/index.js"></script>
 
 </body>
 
