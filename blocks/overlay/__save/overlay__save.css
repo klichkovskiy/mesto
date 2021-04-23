@@ -11,4 +11,9 @@
   font-size: 18px;
   line-height: 22px;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.overlay__save:hover{
+  opacity: 0.8;
 }

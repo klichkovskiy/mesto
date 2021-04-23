@@ -6,11 +6,11 @@ let captionInput = document.querySelector('.overlay__caption');
 let profileName = document.querySelector('.profile__name');
 let profileCaption = document.querySelector('.profile__caption');
 
-function overlayOpenClose(){
+function overlayClick(){
   overlayForm.classList.toggle('overlay__opened');
 };
-editButton.addEventListener('click', overlayOpenClose);
-overlayClose.addEventListener('click', overlayOpenClose);
+editButton.addEventListener('click', overlayClick);
+overlayClose.addEventListener('click', overlayClick);
 
 function formSubmitHandler (evt) {
   evt.preventDefault();

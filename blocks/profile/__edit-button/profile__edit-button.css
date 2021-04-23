@@ -10,6 +10,11 @@
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.profile__edit-button:hover{
+  opacity: 0.6;
 }
 
 @media (max-width: 600px){
