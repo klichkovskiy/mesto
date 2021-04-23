@@ -11,4 +11,9 @@
   cursor: pointer;
   justify-self: center;
   align-self: center;
+  transition: 0.3s ease-in-out;
+}
+
+.card__like:hover{
+  opacity: 0.5;
 }
