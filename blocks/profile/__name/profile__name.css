@@ -1,4 +1,5 @@
 .profile__name{
+  min-width: 300px;
   grid-column-start: 1;
   grid-column-end: 2;
   margin: 0;
@@ -6,17 +7,24 @@
   font-size: 42px;
   line-height: 48px;
   position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 800px){
   .profile__name{
     justify-self: center;
+    max-width: 400px;
   }
 }
 
 @media (max-width: 600px){
   .profile__name{
+    justify-self: end;
     font-size: 27px;
     line-height: 33px;
+    min-width: 190px;
+    max-width: 190px;
   }
 }

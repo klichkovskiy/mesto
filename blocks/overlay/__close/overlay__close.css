@@ -16,3 +16,12 @@
 .overlay__close:hover{
   opacity: 0.6;
 }
+
+@media (max-width: 400px){
+  .overlay__close{
+    right: 0px;
+    top: -45px;
+    width: 26px;
+    height: 26px;
+  }
+}

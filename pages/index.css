@@ -9,8 +9,6 @@
 @import url(../blocks/page/__header/page__header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
-@import url(../blocks/content/content.css);
-
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/page/__profile/page__profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -27,7 +25,7 @@
 @import url(../blocks/card/__info/card__info.css);
 @import url(../blocks/card/__name/card__name.css);
 @import url(../blocks/card/__like/card__like.css);
-@import url(../blocks/card/__like-hover/card__like-hover.css);
+@import url(../blocks/card/__like/_aktive/card__like_aktive.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/page/__footer/page__footer.css);
@@ -35,13 +33,13 @@
 
 @import url(../blocks/overlay/overlay.css);
 @import url(../blocks/page/__overlay/page__overlay.css);
-@import url(../blocks/overlay/__opened/overlay__opened.css);
-@import url(../blocks/overlay/__form/overlay__form.css);
-@import url(../blocks/overlay/__close/overlay__close.css);
+@import url(../blocks/overlay/_opened/overlay_opened.css);
+@import url(../blocks/overlay/__popup/overlay__popup.css);
 @import url(../blocks/overlay/__heading/overlay__heading.css);
-@import url(../blocks/overlay/__info-name/overlay__info-name.css);
+@import url(../blocks/overlay/__close/overlay__close.css);
+@import url(../blocks/overlay/__form/overlay__form.css);
+@import url(../blocks/overlay/__info/overlay__info.css);
 @import url(../blocks/overlay/__item/overlay__item.css);
-@import url(../blocks/overlay/__name/overlay__name.css);
-@import url(../blocks/overlay/__info-caption/overlay__info-caption.css);
-@import url(../blocks/overlay/__caption/overlay__caption.css);
+@import url(../blocks/overlay/__item/_name/overlay__item_name.css);
+@import url(../blocks/overlay/__item/_caption/overlay__item_caption.css);
 @import url(../blocks/overlay/__save/overlay__save.css);

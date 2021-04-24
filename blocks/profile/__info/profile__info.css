@@ -1,6 +1,5 @@
 .profile__info{
   display: grid;
-  max-width: 336px;
   align-self: center;
   row-gap: 16px;
   column-gap: 18px;

@@ -1,0 +1,9 @@
+.overlay__item_name{
+  margin-top: 54px;
+}
+
+@media (max-width: 650px){
+  .overlay__item_name{
+    margin-top: 75px;
+  }
+}

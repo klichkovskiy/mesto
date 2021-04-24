@@ -88,22 +88,23 @@
     </footer>
 
     <section class="overlay page__overlay">
-      <form class="overlay__form">
-        <button type="button" class="overlay__close"></button>
+      <div class="overlay__popup">
         <h2 class="overlay__heading">Редактировать профиль</h2>
-        <fieldset class="overlay__info-name">
-          <input type="text" class="overlay__item overlay__name" value="Жак-Ив Кусто">
-        </fieldset>
-        <fieldset class="overlay__info-caption">
-          <input type="text" class="overlay__item overlay__caption" value="Исследователь океана">
-        </fieldset>
-        <button type="submit" class="overlay__save">Сохранить</button>
-      </form>
+        <button type="button" class="overlay__close"></button>
+        <form name="form-info" class="overlay__form">
+          <fieldset class="overlay__info">
+            <input type="text" name="popup-name" class="overlay__item overlay__item_name" placeholder="Ваше имя">
+            <input type="text" name="popup-caption" class="overlay__item overlay__item_caption"
+              placeholder="Ваша профессия">
+          </fieldset>
+          <button type="submit" class="overlay__save">Сохранить</button>
+        </form>
+      </div>
     </section>
 
   </div>
 
-<script src="./scripts/index.js"></script>
+  <script src="./scripts/index.js"></script>
 
 </body>
 
