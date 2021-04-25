@@ -6,11 +6,20 @@
   line-height: 17px;
   color: #000;
   padding: 0 0 13px;
+  margin-top: 30px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.overlay__item:first-of-type{
+  margin-top: 54px;
 }
 
 @media (max-width: 650px){
   .overlay__item{
     min-width: 238px;
   }
+  .overlay__item:first-of-type{
+    margin-top: 75px;
+  }
 }
+

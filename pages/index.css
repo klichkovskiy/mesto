@@ -40,6 +40,4 @@
 @import url(../blocks/overlay/__form/overlay__form.css);
 @import url(../blocks/overlay/__info/overlay__info.css);
 @import url(../blocks/overlay/__item/overlay__item.css);
-@import url(../blocks/overlay/__item/_name/overlay__item_name.css);
-@import url(../blocks/overlay/__item/_caption/overlay__item_caption.css);
 @import url(../blocks/overlay/__save/overlay__save.css);

@@ -7,18 +7,22 @@ let captionInput = document.querySelector('.overlay__item_caption');
 let profileName = document.querySelector('.profile__name');
 let profileCaption = document.querySelector('.profile__caption');
 
-function overlayClick(){
+function overlayClickOpen(){
   nameInput.value = profileName.textContent;
   captionInput.value = profileCaption.textContent;
   overlayOpen.classList.toggle('overlay_opened');
 };
-editButton.addEventListener('click', overlayClick);
-overlayClose.addEventListener('click', overlayClick);
+editButton.addEventListener('click', overlayClickOpen);
+
+function overlayClickClose(){
+  overlayOpen.classList.toggle('overlay_opened');
+};
+overlayClose.addEventListener('click', overlayClickClose);
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileCaption.textContent = captionInput.value;
-  overlayClick()
+  overlayClickClose()
 }
 overlayForm.addEventListener('submit', formSubmitHandler); 
