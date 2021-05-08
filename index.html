@@ -29,55 +29,7 @@
         <button type="button" value="" class="profile__add-button"></button>
       </section>
 
-      <section class="cards page__cards">
-
-        <article class="card">
-          <img src="./image/karachaevsk.jpg" alt="Церковь на фоне леса" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Карачаевск</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./image/ilbrus.jpg" alt="Гора с закатом" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Гора Эльбрус</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./image/dombai.jpg" alt="Горы и лес" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Домбай</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./image/ilbrus.jpg" alt="Гора с закатом" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Гора Эльбрус</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./image/dombai.jpg" alt="Горы и лес" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Домбай</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
-
-        <article class="card">
-          <img src="./image/karachaevsk.jpg" alt="Церковь на фоне леса" class="card__image">
-          <div class="card__info">
-            <h2 class="card__name">Карачаево-Черкессия</h2>
-            <button type="button" class="card__like"></button>
-          </div>
-        </article>
+      <section class="cards page__cards" id="cards">
 
       </section>
 
@@ -87,13 +39,14 @@
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
 
-    <section class="overlay page__overlay">
+    <section class="overlay page__overlay" id="overlay-profile">
       <div class="overlay__popup">
         <h2 class="overlay__heading">Редактировать профиль</h2>
         <button type="button" class="overlay__close"></button>
         <form name="form-info" class="overlay__form">
           <fieldset class="overlay__info">
-            <input type="text" name="popup-name" class="overlay__item overlay__item_profile_name" placeholder="Ваше имя">
+            <input type="text" name="popup-name" class="overlay__item overlay__item_profile_name"
+              placeholder="Ваше имя">
             <input type="text" name="popup-caption" class="overlay__item overlay__item_profile_caption"
               placeholder="Ваша профессия">
           </fieldset>
@@ -101,6 +54,41 @@
         </form>
       </div>
     </section>
+
+
+
+    <section class="overlay page__overlay" id="overlay-card">
+      <div class="overlay__popup">
+        <h2 class="overlay__heading">Новое место</h2>
+        <button type="button" class="overlay__close"></button>
+        <form name="form-info" class="overlay__form">
+          <fieldset class="overlay__info">
+            <input type="text" name="popup-name" class="overlay__item overlay__item_profile_name">
+            <input type="text" name="popup-caption" class="overlay__item overlay__item_profile_caption">
+          </fieldset>
+          <button type="submit" class="overlay__save">Создать</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="overlay page__overlay" id="overlay-image">
+      <div class="overlay__open-image">
+        <img src="" alt="" class="overlay__image">
+        <h2 class="overlay__name"></h2>
+        <button type="button" class="overlay__close" id="overlay-close"></button>
+      </div>
+    </section>
+
+    <template id="new-card">
+      <article class="card">
+        <img src="" alt="" class="card__image">
+        <button type="button" class="card__delete" id="card-delete"></button>
+        <div class="card__info">
+          <h2 class="card__name"></h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </article>
+    </template>
 
   </div>
 
