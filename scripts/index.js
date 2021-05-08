@@ -90,12 +90,12 @@ function formSubmitProfileHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileCaption.textContent = captionProfileInput.value;
-  return
-  overlayProfileClickClose()
+  overlayProfileClickClose();
 }
 overlayProfileForm.addEventListener('submit', formSubmitProfileHandler);
 
-//функция создания новых карточек и возможность ставить лайк
+
+//функция создания новых карточек и возможность ставить лайк, открыть, закрыть и удалть карточку
 function formSubmitCardHandler(evt) {
   const cardNew = card.cloneNode(true);
   const cardName = cardNew.querySelector('.card__name');
@@ -111,12 +111,12 @@ function formSubmitCardHandler(evt) {
     evt.target.classList.toggle('card__like_aktive');
   });
 
-      //функция удаления карточки с фотографией
-      const cardDelete = cardNew.querySelector('#card-delete');
-      cardDelete.addEventListener('click', function () {
-        const listItem = cardDelete.closest('.card');
-        listItem.remove();
-      });
+  //функция удаления карточки с фотографией
+  const cardDelete = cardNew.querySelector('#card-delete');
+  cardDelete.addEventListener('click', function () {
+    const listItem = cardDelete.closest('.card');
+    listItem.remove();
+  });
 
   //функция открытия просмотра фотографии
   cardImage.addEventListener('click', function (evt) {
@@ -132,15 +132,15 @@ function formSubmitCardHandler(evt) {
 };
 overlayCardForm.addEventListener('submit', formSubmitCardHandler);
 
-  //функция закрытия просмотра фотографии
-  const overlayImage = document.querySelector('#overlay-image');
-  const overlayImageClose = overlayImage.querySelector('.overlay__close');
-  overlayImageClose.addEventListener('click', function () {
-    console.log('exit')
-    overlayImage.classList.toggle('overlay_opened');
-  });
+//функция закрытия просмотра фотографии
+const overlayImage = document.querySelector('#overlay-image');
+const overlayImageClose = overlayImage.querySelector('.overlay__close');
+overlayImageClose.addEventListener('click', function () {
+  console.log('exit')
+  overlayImage.classList.toggle('overlay_opened');
+});
 
-//функция создания стартовых карточек и возможность ставить лайк
+//функция создания стартовых карточек и возможность ставить лайк, открыть, закрыть и удалть карточку
 function initialStartCards() {
   for (let i = 0; i <= initialCards.length; i++) {
     const cardNew = cardNewTemlate.querySelector('.card').cloneNode(true);
@@ -150,9 +150,6 @@ function initialStartCards() {
     cardImage.src = initialCards[i]['link'];
     cardImage.alt = initialCards[i]['name'];
     cardsBlock.append(cardNew);
-
-
-
 
     //функция поставки лайка
     cardNew.querySelector('.card__like').addEventListener('click', function (evt) {
