@@ -55,47 +55,63 @@ const initialCards = [
 ];
 
 
+
 //функция открытия формы изменения имени и рода деятельности
-function overlayProfileClickOpen() {
+function openOverlayProfileClick() {
   nameProfileInput.value = profileName.textContent;
   captionProfileInput.value = profileCaption.textContent;
   overlayProfileOpen.classList.toggle('overlay_opened');
 };
-editButton.addEventListener('click', overlayProfileClickOpen);
+editButton.addEventListener('click', openOverlayProfileClick);
 
 //функция открытия формы создания карточек
-function overlayCardClickOpen() {
+function openOverlayCardClick() {
   nameCardInput.placeholder = 'Название';
   captionCardInput.placeholder = 'Ссылка на картинку';
   nameCardInput.value = '';
   captionCardInput.value = '';
   overlayCardOpen.classList.toggle('overlay_opened');
 };
-addButton.addEventListener('click', overlayCardClickOpen);
+addButton.addEventListener('click', openOverlayCardClick);
 
 //функция закрытия без сохранения формы изменения имени и рода деятельности
-function overlayProfileClickClose() {
+function closeOverlayProfileClick() {
   overlayProfileOpen.classList.toggle('overlay_opened');
 };
-overlayProfileClose.addEventListener('click', overlayProfileClickClose);
+overlayProfileClose.addEventListener('click', closeOverlayProfileClick);
 
 //функция закрытия без сохранения формы создания карточек
-function overlayCardClickClose() {
+function closeOverlayCardClick() {
   overlayCardOpen.classList.toggle('overlay_opened');
 };
-overlayCardClose.addEventListener('click', overlayCardClickClose);
+overlayCardClose.addEventListener('click', closeOverlayCardClick);
 
 //функция сохранения имени и рода деятельности
-function formSubmitProfileHandler(evt) {
+function saveFormSubmitProfileHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameProfileInput.value;
   profileCaption.textContent = captionProfileInput.value;
-  overlayProfileClickClose();
+  closeOverlayProfileClick();
 }
-overlayProfileForm.addEventListener('submit', formSubmitProfileHandler);
+overlayProfileForm.addEventListener('submit', saveFormSubmitProfileHandler);
 
 
-//функция создания новых карточек и возможность ставить лайк, открыть, закрыть и удалть карточку
+//функция закрытия просмотра фотографии
+const overlayImage = document.querySelector('#overlay-image');
+const overlayImageClose = overlayImage.querySelector('.overlay__close');
+overlayImageClose.addEventListener('click', function () {
+  console.log('exit')
+  overlayImage.classList.toggle('overlay_opened');
+});
+
+
+//функция поставки лайка
+function putLike(evt) {
+  evt.target.classList.toggle('card__like_aktive');
+};
+
+
+//функция создания новых карточек и возможность ставить лайк, удалить карточку
 function formSubmitCardHandler(evt) {
   const cardNew = card.cloneNode(true);
   const cardName = cardNew.querySelector('.card__name');
@@ -104,12 +120,12 @@ function formSubmitCardHandler(evt) {
   cardName.textContent = nameCardInput.value;
   cardImage.src = captionCardInput.value;
   cardsBlock.prepend(cardNew);
-  overlayCardClickClose();
+  closeOverlayCardClick();
 
-  //функция поставки лайка
-  cardNew.querySelector('.card__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like_aktive');
-  });
+
+  //поставка лайка
+  cardNew.querySelector('.card__like').addEventListener('click', putLike);
+
 
   //функция удаления карточки с фотографией
   const cardDelete = cardNew.querySelector('#card-delete');
@@ -118,9 +134,9 @@ function formSubmitCardHandler(evt) {
     listItem.remove();
   });
 
+
   //функция открытия просмотра фотографии
   cardImage.addEventListener('click', function (evt) {
-    console.log('клик');
     const overlayImage = document.querySelector('#overlay-image');
     const overlayImageName = overlayImage.querySelector('.overlay__name');
     const overlayImageItem = overlayImage.querySelector('.overlay__image');
@@ -132,29 +148,23 @@ function formSubmitCardHandler(evt) {
 };
 overlayCardForm.addEventListener('submit', formSubmitCardHandler);
 
-//функция закрытия просмотра фотографии
-const overlayImage = document.querySelector('#overlay-image');
-const overlayImageClose = overlayImage.querySelector('.overlay__close');
-overlayImageClose.addEventListener('click', function () {
-  console.log('exit')
-  overlayImage.classList.toggle('overlay_opened');
-});
 
-//функция создания стартовых карточек и возможность ставить лайк, открыть, закрыть и удалть карточку
+
+//функция создания стартовых карточек и возможность ставить лайк, удалить карточку
 function initialStartCards() {
   for (let i = 0; i <= initialCards.length; i++) {
     const cardNew = cardNewTemlate.querySelector('.card').cloneNode(true);
     const cardName = cardNew.querySelector('.card__name');
     const cardImage = cardNew.querySelector('.card__image');
-    cardName.textContent = initialCards[i]['name'];
-    cardImage.src = initialCards[i]['link'];
-    cardImage.alt = initialCards[i]['name'];
+    cardName.textContent = initialCards[i].name;
+    cardImage.src = initialCards[i].link;
+    cardImage.alt = initialCards[i].name;
     cardsBlock.append(cardNew);
 
-    //функция поставки лайка
-    cardNew.querySelector('.card__like').addEventListener('click', function (evt) {
-      evt.target.classList.toggle('card__like_aktive');
-    });
+
+    //поставка лайка
+    cardNew.querySelector('.card__like').addEventListener('click', putLike);
+
 
     //функция удаления карточки с фотографией
     const cardDelete = cardNew.querySelector('#card-delete');
@@ -163,9 +173,9 @@ function initialStartCards() {
       listItem.remove();
     });
 
+
     //функция открытия просмотра фотографии
     cardImage.addEventListener('click', function (evt) {
-      console.log('click')
       const overlayImage = document.querySelector('#overlay-image');
       const overlayImageName = overlayImage.querySelector('.overlay__name');
       const overlayImageItem = overlayImage.querySelector('.overlay__image');
@@ -175,14 +185,7 @@ function initialStartCards() {
       overlayImageItem.alt = cardName.textContent;
     });
   };
-
-
-
-
 };
 initialStartCards()
-
-
-
 
 
