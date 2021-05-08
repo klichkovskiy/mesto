@@ -111,7 +111,7 @@ function putLike(evt) {
 };
 
 
-//функция создания новых карточек и возможность ставить лайк, удалить карточку
+//функция создания новых карточек и возможность ставить лайк, удалить карточку, открыть фото
 function formSubmitCardHandler(evt) {
   const cardNew = card.cloneNode(true);
   const cardName = cardNew.querySelector('.card__name');
@@ -127,7 +127,7 @@ function formSubmitCardHandler(evt) {
   cardNew.querySelector('.card__like').addEventListener('click', putLike);
 
 
-  //функция удаления карточки с фотографией
+  //установка слушателя и  удаление карточки с фотографией
   const cardDelete = cardNew.querySelector('#card-delete');
   cardDelete.addEventListener('click', function () {
     const listItem = cardDelete.closest('.card');
@@ -135,7 +135,7 @@ function formSubmitCardHandler(evt) {
   });
 
 
-  //функция открытия просмотра фотографии
+  //установка слушателя и  открытие просмотра фотографии
   cardImage.addEventListener('click', function (evt) {
     const overlayImage = document.querySelector('#overlay-image');
     const overlayImageName = overlayImage.querySelector('.overlay__name');
@@ -150,23 +150,23 @@ overlayCardForm.addEventListener('submit', formSubmitCardHandler);
 
 
 
-//функция создания стартовых карточек и возможность ставить лайк, удалить карточку
+//функция создания стартовых карточек и возможность ставить лайк, удалить карточку, открыть фото
 function initialStartCards() {
   for (let i = 0; i <= initialCards.length; i++) {
-    const cardNew = cardNewTemlate.querySelector('.card').cloneNode(true);
+    const cardNew = card.cloneNode(true);
     const cardName = cardNew.querySelector('.card__name');
     const cardImage = cardNew.querySelector('.card__image');
     cardName.textContent = initialCards[i].name;
     cardImage.src = initialCards[i].link;
     cardImage.alt = initialCards[i].name;
-    cardsBlock.append(cardNew);
+    cardsBlock.prepend(cardNew);
 
 
     //поставка лайка
     cardNew.querySelector('.card__like').addEventListener('click', putLike);
 
 
-    //функция удаления карточки с фотографией
+    //установка слушателя и  удаление карточки с фотографией
     const cardDelete = cardNew.querySelector('#card-delete');
     cardDelete.addEventListener('click', function () {
       const listItem = cardDelete.closest('.card');
@@ -174,7 +174,7 @@ function initialStartCards() {
     });
 
 
-    //функция открытия просмотра фотографии
+    //установка слушателя и открытие просмотра фотографии
     cardImage.addEventListener('click', function (evt) {
       const overlayImage = document.querySelector('#overlay-image');
       const overlayImageName = overlayImage.querySelector('.overlay__name');
