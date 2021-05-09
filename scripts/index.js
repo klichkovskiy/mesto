@@ -66,8 +66,6 @@ editButton.addEventListener('click', openOverlayProfileClick);
 
 //функция открытия формы создания карточек
 function openOverlayCardClick() {
-  nameCardInput.placeholder = 'Название';
-  captionCardInput.placeholder = 'Ссылка на картинку';
   nameCardInput.value = '';
   captionCardInput.value = '';
   overlayCardOpen.classList.toggle('overlay_opened');
