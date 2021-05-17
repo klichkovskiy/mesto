@@ -7,6 +7,7 @@
   max-width: 430px;
   background-color: #fff;
   border-radius: 10px;
+  z-index: 1;
 }
 
 @media (max-width: 650px){

@@ -2,21 +2,21 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
 const overlayProfileOpen = document.querySelector('#overlay-profile');
-const overlayProfileClose = overlayProfileOpen.querySelector('.overlay__close');
-const overlayProfileForm = overlayProfileOpen.querySelector('.overlay__form');
+const overlayCardOpen = document.querySelector('#overlay-card');
 
-const nameProfileInput = overlayProfileOpen.querySelector('.overlay__item_profile_name');
-const captionProfileInput = overlayProfileOpen.querySelector('.overlay__item_profile_caption');
+const overlayProfileClose = overlayProfileOpen.querySelector('.overlay__close');
+const overlayCardClose = overlayCardOpen.querySelector('.overlay__close');
+
+const formEditProfile = document.forms['form-edit-profile'];
+const fieldNameEditProfile = formEditProfile.elements['name-profile'];
+const fieldCaptionEditProfile = formEditProfile.elements['caption-profile'];
+
+const formCreationCard = document.forms['form-creation-card'];
+const fieldNameNewCard = formCreationCard.elements['name-card'];
+const fieldLinkNewCard = formCreationCard.elements['link-card'];
 
 const profileName = document.querySelector('.profile__name');
 const profileCaption = document.querySelector('.profile__caption');
-
-const overlayCardOpen = document.querySelector('#overlay-card');
-const overlayCardClose = overlayCardOpen.querySelector('.overlay__close');
-const overlayCardForm = overlayCardOpen.querySelector('.overlay__form');
-
-const nameCardInput = overlayCardOpen.querySelector('.overlay__item_profile_name');
-const captionCardInput = overlayCardOpen.querySelector('.overlay__item_profile_caption');
 
 const cardNewTemlate = document.querySelector('#new-card').content;
 const card = cardNewTemlate.querySelector('.card');
@@ -66,16 +66,16 @@ function togglePopup(popupNameConst) {
 //функция открытия формы изменения имени и рода деятельности
 function openOverlayProfileClick() {
   togglePopup(overlayProfileOpen);
-  nameProfileInput.value = profileName.textContent;
-  captionProfileInput.value = profileCaption.textContent;
+  fieldNameEditProfile.value = profileName.textContent;
+  fieldCaptionEditProfile.value = profileCaption.textContent;
 };
 editButton.addEventListener('click', openOverlayProfileClick);
 
 //функция открытия формы создания карточек
 function openOverlayCardClick() {
   togglePopup(overlayCardOpen);
-  nameCardInput.value = '';
-  captionCardInput.value = '';
+  fieldNameNewCard.value = '';
+  fieldLinkNewCard.value = '';
 };
 addButton.addEventListener('click', openOverlayCardClick);
 
@@ -91,14 +91,26 @@ function closeOverlayCardClick() {
 };
 overlayCardClose.addEventListener('click', closeOverlayCardClick);
 
+
+/** 
+function closeOverlayCardEscape (evt) {
+  if (evt.key === 'Escape') {
+    console.log('escape')
+    closeOverlayCardClick ();
+  }
+}
+formCreationCard.addEventListener('keydown', closeOverlayCardEscape);
+**/
+
+
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = nameProfileInput.value;
-  profileCaption.textContent = captionProfileInput.value;
+  profileName.textContent = fieldNameEditProfile.value;
+  profileCaption.textContent = fieldCaptionEditProfile.value;
   closeOverlayProfileClick();
 }
-overlayProfileForm.addEventListener('submit', saveFormSubmitProfileHandler);
+formEditProfile.addEventListener('submit', saveFormSubmitProfileHandler);
 
 //функция закрытия просмотра фотографии
 const overlayImageClose = overlayImage.querySelector('.overlay__close');
@@ -146,12 +158,12 @@ function renderCard(cardNew) {
 
 //функция создания новых карточек
 function formSubmitCardHandler(evt) {
-  const cardNew = createCard(nameCardInput.value, captionCardInput.value);
+  const cardNew = createCard(fieldNameNewCard.value, fieldLinkNewCard.value);
   evt.preventDefault();
   renderCard(cardNew);
   closeOverlayCardClick();
 };
-overlayCardForm.addEventListener('submit', formSubmitCardHandler);
+formCreationCard.addEventListener('submit', formSubmitCardHandler);
 
 //функция создания стартовых карточек
 function initialStartCards() {
