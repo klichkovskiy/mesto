@@ -1,4 +1,4 @@
-.overlay__info{
+.form__fieldset{
   margin: 0;
   border: none;
   display: flex;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 650px){
-  .overlay__info{
+  .form__fieldset{
     padding: 0 22px 0;
   }
 }

@@ -1,0 +1,10 @@
+.form__input-error{
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  position: absolute;
+  bottom: -19px;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+}

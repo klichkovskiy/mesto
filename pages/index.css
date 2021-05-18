@@ -38,10 +38,15 @@
 @import url(../blocks/overlay/__popup/overlay__popup.css);
 @import url(../blocks/overlay/__heading/overlay__heading.css);
 @import url(../blocks/overlay/__close/overlay__close.css);
-@import url(../blocks/overlay/__form/overlay__form.css);
-@import url(../blocks/overlay/__info/overlay__info.css);
-@import url(../blocks/overlay/__item/overlay__item.css);
-@import url(../blocks/overlay/__save/overlay__save.css);
+
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__fieldset/form__fieldset.css);
+@import url(../blocks/form/__field/form__field.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__input/_type/_error/form__input_type_error.css);
+@import url(../blocks/form/__button/form__button.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 
 @import url(../blocks/overlay/__open-image/overlay__open-image.css);
 @import url(../blocks/overlay/__image/overlay__image.css);

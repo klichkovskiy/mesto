@@ -92,7 +92,7 @@ function closeOverlayCardClick() {
 overlayCardClose.addEventListener('click', closeOverlayCardClick);
 
 
-/** 
+/**
 function closeOverlayCardEscape (evt) {
   if (evt.key === 'Escape') {
     console.log('escape')
@@ -100,7 +100,8 @@ function closeOverlayCardEscape (evt) {
   }
 }
 formCreationCard.addEventListener('keydown', closeOverlayCardEscape);
-**/
+formCreationCard.removeEventListener('keydown', closeOverlayCardEscape);
+*/
 
 
 //функция сохранения имени и рода деятельности
