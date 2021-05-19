@@ -47,12 +47,12 @@
           <fieldset class="form__fieldset">
             <label for="name-profile" class="form__field">
               <input type="text" id="name-profile" name="name-profile" class="form__input" placeholder="Ваше имя"
-                required>
+                required minlength="2" maxlength="40">
               <span class="name-profile-error form__input-error"></span>
             </label>
             <label for="caption-profile" class="form__field">
               <input type="text" id="caption-profile" name="caption-profile" class="form__input"
-                placeholder="Ваша профессия" required>
+                placeholder="Ваша профессия" required minlength="2" maxlength="200">
               <span class="caption-profile-error form__input-error"></span>
             </label>
           </fieldset>
@@ -68,7 +68,8 @@
         <form name="form-creation-card" class="form" novalidate>
           <fieldset class="form__fieldset">
             <label for="name-profile" class="form__field">
-              <input type="text" id="name-card" name="name-card" class="form__input" placeholder="Название" required>
+              <input type="text" id="name-card" name="name-card" class="form__input" placeholder="Название" required
+                minlength="2" maxlength="30">
               <span class="name-card-error form__input-error"></span>
             </label>
             <label for="name-profile" class="form__field">
@@ -102,9 +103,9 @@
     </template>
 
   </div>
-  <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
-  
+  <script src="./scripts/validate.js"></script>
+
 
 </body>
 
