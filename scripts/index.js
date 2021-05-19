@@ -58,14 +58,28 @@ const initialCards = [
 ];
 
 
-//функция открытия и закрытия popupов
-function togglePopup(popupNameConst) {
-  popupNameConst.classList.toggle('overlay_opened');
+//функция открытия popupов
+function openPopup(popupNameConst) {
+  popupNameConst.classList.add('overlay_opened');
+  document.addEventListener('keydown', closePopupCardEscape)
 };
+
+//функция закрытия popupов
+function closePopup(popupNameConst) {
+  popupNameConst.classList.remove('overlay_opened');
+  document.removeEventListener('keydown', closePopupCardEscape)//подумать как сделать чтобы подтягивался класс в который оно вставило
+};
+
+//функция закрытия popup карточек на клавишу esc
+function closePopupCardEscape (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(overlayCardOpen);
+  }
+}
 
 //функция открытия формы изменения имени и рода деятельности
 function openOverlayProfileClick() {
-  togglePopup(overlayProfileOpen);
+  openPopup(overlayProfileOpen);
   fieldNameEditProfile.value = profileName.textContent;
   fieldCaptionEditProfile.value = profileCaption.textContent;
 };
@@ -73,36 +87,25 @@ editButton.addEventListener('click', openOverlayProfileClick);
 
 //функция открытия формы создания карточек
 function openOverlayCardClick() {
-  togglePopup(overlayCardOpen);
+  openPopup(overlayCardOpen);
   fieldNameNewCard.value = '';
   fieldLinkNewCard.value = '';
+  
 };
 addButton.addEventListener('click', openOverlayCardClick);
 
 //функция закрытия без сохранения формы изменения имени и рода деятельности
 function closeOverlayProfileClick() {
-  togglePopup(overlayProfileOpen);
+  closePopup(overlayProfileOpen);
 };
 overlayProfileClose.addEventListener('click', closeOverlayProfileClick);
 
 //функция закрытия без сохранения формы создания карточек
 function closeOverlayCardClick() {
-  togglePopup(overlayCardOpen);
+  closePopup(overlayCardOpen);
+  
 };
 overlayCardClose.addEventListener('click', closeOverlayCardClick);
-
-
-/**
-function closeOverlayCardEscape (evt) {
-  if (evt.key === 'Escape') {
-    console.log('escape')
-    closeOverlayCardClick ();
-  }
-}
-formCreationCard.addEventListener('keydown', closeOverlayCardEscape);
-formCreationCard.removeEventListener('keydown', closeOverlayCardEscape);
-*/
-
 
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
@@ -116,7 +119,7 @@ formEditProfile.addEventListener('submit', saveFormSubmitProfileHandler);
 //функция закрытия просмотра фотографии
 const overlayImageClose = overlayImage.querySelector('.overlay__close');
 overlayImageClose.addEventListener('click', function () {
-  togglePopup(overlayImage);
+  closePopup(overlayImage);
 });
 
 //функция обработки лайка
@@ -144,7 +147,7 @@ function createCard(cardName, cardLink) {
 
   //установка слушателя и открытие просмотра фотографии
   cardNewImage.addEventListener('click', function (evt) {
-    togglePopup(overlayImage);
+    openPopup(overlayImage);
     overlayImageName.textContent = cardName;
     overlayImageItem.src = cardLink;
     overlayImageItem.alt = cardName;
