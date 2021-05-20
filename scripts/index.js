@@ -30,6 +30,8 @@ const cardImage = cardNew.querySelector('.card__image');
 const overlayImage = document.querySelector('#overlay-image');
 const overlayImageName = overlayImage.querySelector('.overlay__name');
 const overlayImageItem = overlayImage.querySelector('.overlay__image');
+const overlayImageClose = overlayImage.querySelector('.overlay__close');
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -61,19 +63,29 @@ const initialCards = [
 //функция открытия popupов
 function openPopup(popupNameConst) {
   popupNameConst.classList.add('overlay_opened');
-  document.addEventListener('keydown', closePopupCardEscape)
+  document.addEventListener('keydown', closePopupCardEscape);
 };
 
-//функция закрытия popupов
+//функция закрытия popupов 
 function closePopup(popupNameConst) {
   popupNameConst.classList.remove('overlay_opened');
-  document.removeEventListener('keydown', closePopupCardEscape)//подумать как сделать чтобы подтягивался класс в который оно вставило
+  document.removeEventListener('keydown', closePopupCardEscape);
+
+};
+
+//функция закрытия нажатием за пределами оверлея
+function closeOutsidePopup(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt);
+  }
 };
 
 //функция закрытия popup карточек на клавишу esc
-function closePopupCardEscape (evt) {
+function closePopupCardEscape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(overlayCardOpen);
+    overlayCardOpen.classList.remove('overlay_opened');
+    overlayProfileOpen.classList.remove('overlay_opened');
+    overlayImage.classList.remove('overlay_opened');
   }
 }
 
@@ -90,7 +102,6 @@ function openOverlayCardClick() {
   openPopup(overlayCardOpen);
   fieldNameNewCard.value = '';
   fieldLinkNewCard.value = '';
-  
 };
 addButton.addEventListener('click', openOverlayCardClick);
 
@@ -99,13 +110,15 @@ function closeOverlayProfileClick() {
   closePopup(overlayProfileOpen);
 };
 overlayProfileClose.addEventListener('click', closeOverlayProfileClick);
+overlayProfileClose.addEventListener('click', closeOutsidePopup);
+
 
 //функция закрытия без сохранения формы создания карточек
 function closeOverlayCardClick() {
   closePopup(overlayCardOpen);
-  
 };
 overlayCardClose.addEventListener('click', closeOverlayCardClick);
+overlayCardClose.addEventListener('click', closeOutsidePopup);
 
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
@@ -117,10 +130,11 @@ function saveFormSubmitProfileHandler(evt) {
 formEditProfile.addEventListener('submit', saveFormSubmitProfileHandler);
 
 //функция закрытия просмотра фотографии
-const overlayImageClose = overlayImage.querySelector('.overlay__close');
-overlayImageClose.addEventListener('click', function () {
+function closeImageClick() {
   closePopup(overlayImage);
-});
+};
+overlayImageClose.addEventListener('click', closeImageClick);
+overlayImageClose.addEventListener('click', closeOutsidePopup);
 
 //функция обработки лайка
 function putLike(evt) {
