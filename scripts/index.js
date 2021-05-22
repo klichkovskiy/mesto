@@ -27,6 +27,8 @@ const cardNew = card.cloneNode(true);
 const cardName = cardNew.querySelector('.card__name');
 const cardImage = cardNew.querySelector('.card__image');
 
+const overlay = Array.from(document.querySelectorAll('.overlay'));
+
 const overlayImage = document.querySelector('#overlay-image');
 const overlayImageName = overlayImage.querySelector('.overlay__name');
 const overlayImageItem = overlayImage.querySelector('.overlay__image');
@@ -59,6 +61,23 @@ const initialCards = [
   }
 ];
 
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__botton_type_no-validate',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+});
+
+//функция закрытия popupов на клавишу esc
+function closePopupCardEscape(evt) {
+  if (evt.key === 'Escape') {
+    overlayCardOpen.classList.remove('overlay_opened');
+    overlayProfileOpen.classList.remove('overlay_opened');
+    overlayImage.classList.remove('overlay_opened');
+  }
+}
 
 //функция открытия popupов
 function openPopup(popupNameConst) {
@@ -70,30 +89,24 @@ function openPopup(popupNameConst) {
 function closePopup(popupNameConst) {
   popupNameConst.classList.remove('overlay_opened');
   document.removeEventListener('keydown', closePopupCardEscape);
-
 };
 
 //функция закрытия нажатием за пределами оверлея
 function closeOutsidePopup(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt);
-  }
-};
-
-//функция закрытия popup карточек на клавишу esc
-function closePopupCardEscape(evt) {
-  if (evt.key === 'Escape') {
-    overlayCardOpen.classList.remove('overlay_opened');
-    overlayProfileOpen.classList.remove('overlay_opened');
-    overlayImage.classList.remove('overlay_opened');
-  }
+if (evt.target === evt.currentTarget) {
+  evt.target.classList.remove('overlay_opened');
 }
+};
+overlay.forEach(overlayElement => {overlayElement.addEventListener('mousedown', closeOutsidePopup)});
+
+
 
 //функция открытия формы изменения имени и рода деятельности
 function openOverlayProfileClick() {
   openPopup(overlayProfileOpen);
   fieldNameEditProfile.value = profileName.textContent;
   fieldCaptionEditProfile.value = profileCaption.textContent;
+  toggleButtonState(buttonElement, inputList);
 };
 editButton.addEventListener('click', openOverlayProfileClick);
 
@@ -110,15 +123,12 @@ function closeOverlayProfileClick() {
   closePopup(overlayProfileOpen);
 };
 overlayProfileClose.addEventListener('click', closeOverlayProfileClick);
-overlayProfileClose.addEventListener('click', closeOutsidePopup);
-
 
 //функция закрытия без сохранения формы создания карточек
 function closeOverlayCardClick() {
   closePopup(overlayCardOpen);
 };
 overlayCardClose.addEventListener('click', closeOverlayCardClick);
-overlayCardClose.addEventListener('click', closeOutsidePopup);
 
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
@@ -134,7 +144,6 @@ function closeImageClick() {
   closePopup(overlayImage);
 };
 overlayImageClose.addEventListener('click', closeImageClick);
-overlayImageClose.addEventListener('click', closeOutsidePopup);
 
 //функция обработки лайка
 function putLike(evt) {
@@ -169,6 +178,8 @@ function createCard(cardName, cardLink) {
   return cardNew
 };
 
+
+
 // функция добавления элемента в массив, установка слушателя и открытие окна просмотра фотографии
 function renderCard(cardNew) {
   cardsBlock.prepend(cardNew);
@@ -191,5 +202,4 @@ function initialStartCards() {
   };
 };
 initialStartCards()
-
 
