@@ -73,9 +73,10 @@ enableValidation({
 //функция закрытия popupов на клавишу esc
 function closePopupCardEscape(evt) {
   if (evt.key === 'Escape') {
-    overlayCardOpen.classList.remove('overlay_opened');
-    overlayProfileOpen.classList.remove('overlay_opened');
-    overlayImage.classList.remove('overlay_opened');
+    const overlayAll = Array.from(document.querySelectorAll('.overlay'));
+    overlayAll.forEach((overlay) => {
+      closePopup(overlay)
+    })
   }
 }
 
@@ -94,7 +95,7 @@ function closePopup(popupNameConst) {
 //функция закрытия нажатием за пределами оверлея
 function closeOutsidePopup(evt) {
 if (evt.target === evt.currentTarget) {
-  evt.target.classList.remove('overlay_opened');
+  closePopup(evt.target)
 }
 };
 overlay.forEach(overlayElement => {overlayElement.addEventListener('mousedown', closeOutsidePopup)});

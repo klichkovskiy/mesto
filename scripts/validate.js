@@ -21,12 +21,12 @@ const checkInputValidity = (formElement, inputElement, { ...restConfig}) => {
   };
 }
 
-const hazInvalidInput = (inputList) => {
+const hasInvalidInput = (inputList) => {
   return inputList.some(inputElement => !inputElement.validity.valid)
 }
 
 const toggleButtonState = (buttonElement, inputList, {inactiveButtonClass}) => { //вызвать эту функции при открытии попапов, чтобы кнопка свое состояние принимала сразу 00:02:03 видео Вовы
-  if (hazInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
