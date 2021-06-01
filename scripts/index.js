@@ -61,14 +61,31 @@ const initialCards = [
   }
 ];
 
-enableValidation({
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__button',
-  inactiveButtonClass: 'form__botton_type_no-validate',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-});
+const formEditProfileValidator = new FormValidator(
+  {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inactiveButtonClass: 'form__botton_type_no-validate',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active'
+  },
+    document.querySelector('#form-profile')
+  );
+formEditProfileValidator.enableValidation();
+
+const formCreationCardValidator = new FormValidator(
+  {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inactiveButtonClass: 'form__botton_type_no-validate',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active'
+  },
+    document.querySelector('#form-card')
+);
+formCreationCardValidator.enableValidation();
 
 //функция закрытия popupов на клавишу esc
 function closePopupCardEscape(evt) {
@@ -94,20 +111,18 @@ function closePopup(popupNameConst) {
 
 //функция закрытия нажатием за пределами оверлея
 function closeOutsidePopup(evt) {
-if (evt.target === evt.currentTarget) {
-  closePopup(evt.target)
-}
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target)
+  }
 };
-overlay.forEach(overlayElement => {overlayElement.addEventListener('mousedown', closeOutsidePopup)});
-
-
+overlay.forEach(overlayElement => { overlayElement.addEventListener('mousedown', closeOutsidePopup) });
 
 //функция открытия формы изменения имени и рода деятельности
 function openOverlayProfileClick() {
   openPopup(overlayProfileOpen);
   fieldNameEditProfile.value = profileName.textContent;
   fieldCaptionEditProfile.value = profileCaption.textContent;
-  toggleButtonState(buttonElement, inputList);
+  toggleButtonState();
 };
 editButton.addEventListener('click', openOverlayProfileClick);
 
@@ -146,40 +161,11 @@ function closeImageClick() {
 };
 overlayImageClose.addEventListener('click', closeImageClick);
 
-//функция обработки лайка
-function putLike(evt) {
-  evt.target.classList.toggle('card__like_aktive');
+// функция создания элемента из класса карточки
+function createCard(data) {
+  const card = new Card(data, '#new-card');
+  return card.renderCard()
 };
-
-/* функция создания элемента из данных для карточки, поставка лайка, 
-установка слушателя и удаление карточки с фотографией, установка слушателя и открытие просмотра фотографии */
-function createCard(cardName, cardLink) {
-  const cardNew = card.cloneNode(true);
-  const cardNewImage = cardNew.querySelector('.card__image')
-  cardNew.querySelector('.card__name').textContent = cardName;
-  cardNewImage.src = cardLink;
-  cardNewImage.alt = cardName;
-
-  //поставка лайка
-  cardNew.querySelector('.card__like').addEventListener('click', putLike);
-
-  //установка слушателя и  удаление карточки с фотографией
-  const cardDelete = cardNew.querySelector('#card-delete');
-  cardDelete.addEventListener('click', function () {
-    cardNew.remove();
-  });
-
-  //установка слушателя и открытие просмотра фотографии
-  cardNewImage.addEventListener('click', function (evt) {
-    openPopup(overlayImage);
-    overlayImageName.textContent = cardName;
-    overlayImageItem.src = cardLink;
-    overlayImageItem.alt = cardName;
-  });
-  return cardNew
-};
-
-
 
 // функция добавления элемента в массив, установка слушателя и открытие окна просмотра фотографии
 function renderCard(cardNew) {
@@ -188,7 +174,7 @@ function renderCard(cardNew) {
 
 //функция создания новых карточек
 function formSubmitCardHandler(evt) {
-  const cardNew = createCard(fieldNameNewCard.value, fieldLinkNewCard.value);
+  const cardNew = createCard({ name: fieldNameNewCard.value, link: fieldLinkNewCard.value });
   evt.preventDefault();
   renderCard(cardNew);
   closeOverlayCardClick();
@@ -198,9 +184,9 @@ formCreationCard.addEventListener('submit', formSubmitCardHandler);
 //функция создания стартовых карточек
 function initialStartCards() {
   for (let i = 0; i <= initialCards.length; i++) {
-    const cardNew = createCard(initialCards[i].name, initialCards[i].link);
+    const cardNew = createCard(initialCards[i]);
     renderCard(cardNew);
   };
 };
-initialStartCards()
+initialStartCards();
 
