@@ -1,3 +1,5 @@
+import Card from './Card.js';
+import FormValidator from './Validate.js';
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
@@ -18,20 +20,11 @@ const fieldLinkNewCard = formCreationCard.elements['link-card'];
 const profileName = document.querySelector('.profile__name');
 const profileCaption = document.querySelector('.profile__caption');
 
-const cardNewTemlate = document.querySelector('#new-card').content;
-const card = cardNewTemlate.querySelector('.card');
-
 const cardsBlock = document.querySelector('.cards');
-
-const cardNew = card.cloneNode(true);
-const cardName = cardNew.querySelector('.card__name');
-const cardImage = cardNew.querySelector('.card__image');
 
 const overlay = Array.from(document.querySelectorAll('.overlay'));
 
 const overlayImage = document.querySelector('#overlay-image');
-const overlayImageName = overlayImage.querySelector('.overlay__name');
-const overlayImageItem = overlayImage.querySelector('.overlay__image');
 const overlayImageClose = overlayImage.querySelector('.overlay__close');
 
 const initialCards = [
@@ -87,10 +80,17 @@ const formCreationCardValidator = new FormValidator(
 );
 formCreationCardValidator.enableValidation();
 
+
+//навешивание слушателя на закрытия без сохранения формы изменения имени и рода деятельности
+overlayProfileClose.addEventListener('click', () => closePopup(overlayProfileOpen));
+
+//навешивание слушателя на закрытия без сохранения формы создания карточек
+overlayCardClose.addEventListener('click', () => closePopup(overlayCardOpen));
+
 //функция закрытия popupов на клавишу esc
 function closePopupCardEscape(evt) {
   if (evt.key === 'Escape') {
-    const overlayAll = Array.from(document.querySelectorAll('.overlay'));
+    const overlayAll = Array.from(document.querySelectorAll('.overlay_opened'));
     overlayAll.forEach((overlay) => {
       closePopup(overlay)
     })
@@ -98,7 +98,7 @@ function closePopupCardEscape(evt) {
 }
 
 //функция открытия popupов
-function openPopup(popupNameConst) {
+export default function openPopup(popupNameConst) {
   popupNameConst.classList.add('overlay_opened');
   document.addEventListener('keydown', closePopupCardEscape);
 };
@@ -107,6 +107,7 @@ function openPopup(popupNameConst) {
 function closePopup(popupNameConst) {
   popupNameConst.classList.remove('overlay_opened');
   document.removeEventListener('keydown', closePopupCardEscape);
+  document.querySelector('#form-card').reset();
 };
 
 //функция закрытия нажатием за пределами оверлея
@@ -115,43 +116,37 @@ function closeOutsidePopup(evt) {
     closePopup(evt.target)
   }
 };
-overlay.forEach(overlayElement => { overlayElement.addEventListener('mousedown', closeOutsidePopup) });
+overlay.forEach(overlayElement => { overlayElement.addEventListener('mousedown', closeOutsidePopup) }); 
 
 //функция открытия формы изменения имени и рода деятельности
 function openOverlayProfileClick() {
   openPopup(overlayProfileOpen);
   fieldNameEditProfile.value = profileName.textContent;
   fieldCaptionEditProfile.value = profileCaption.textContent;
-  toggleButtonState();
+  formEditProfileValidator.resetValidationform();
 };
 editButton.addEventListener('click', openOverlayProfileClick);
 
 //функция открытия формы создания карточек
 function openOverlayCardClick() {
   openPopup(overlayCardOpen);
-  fieldNameNewCard.value = '';
-  fieldLinkNewCard.value = '';
+  formCreationCardValidator.resetValidationform();
 };
 addButton.addEventListener('click', openOverlayCardClick);
 
-//функция закрытия без сохранения формы изменения имени и рода деятельности
-function closeOverlayProfileClick() {
-  closePopup(overlayProfileOpen);
+//функция делания кнопки неактивной
+function deactiveButton() {
+  console.log('tut');
+  overlayCardOpen.querySelector('.form__button').classList.add('form__botton_type_no-validate');
+  overlayCardOpen.querySelector('.form__button').disabled = true;
 };
-overlayProfileClose.addEventListener('click', closeOverlayProfileClick);
-
-//функция закрытия без сохранения формы создания карточек
-function closeOverlayCardClick() {
-  closePopup(overlayCardOpen);
-};
-overlayCardClose.addEventListener('click', closeOverlayCardClick);
 
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
   evt.preventDefault();
   profileName.textContent = fieldNameEditProfile.value;
   profileCaption.textContent = fieldCaptionEditProfile.value;
-  closeOverlayProfileClick();
+  closePopup(overlayProfileOpen);
 }
 formEditProfile.addEventListener('submit', saveFormSubmitProfileHandler);
 
@@ -177,16 +172,16 @@ function formSubmitCardHandler(evt) {
   const cardNew = createCard({ name: fieldNameNewCard.value, link: fieldLinkNewCard.value });
   evt.preventDefault();
   renderCard(cardNew);
-  closeOverlayCardClick();
+  closePopup(overlayCardOpen);
+  
 };
 formCreationCard.addEventListener('submit', formSubmitCardHandler);
 
 //функция создания стартовых карточек
 function initialStartCards() {
-  for (let i = 0; i <= initialCards.length; i++) {
-    const cardNew = createCard(initialCards[i]);
+  initialCards.forEach(initialCard => {
+    const cardNew = createCard(initialCard);
     renderCard(cardNew);
-  };
+  });
 };
 initialStartCards();
-

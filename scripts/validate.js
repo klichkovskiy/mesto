@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
@@ -35,13 +35,22 @@ class FormValidator {
   _showInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._config.inputErrorClass);
-    errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._config.errorClass);
+    errorElement.textContent = inputElement.validationMessage;
   }
 
   _hasInvalidInput() {
     return this._inputList.some(inputElement => !inputElement.validity.valid)
   }
+
+  resetValidationform() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+      this.toggleButtonState();
+      
+  })
+  this._config.formSelector.reset();
+}
 
   toggleButtonState() {
     if (this._hasInvalidInput()) {
@@ -60,4 +69,3 @@ class FormValidator {
     this._setEventListeners();
   }
 }
-
