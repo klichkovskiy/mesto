@@ -54,28 +54,23 @@ const initialCards = [
   }
 ];
 
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__botton_type_no-validate',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
 const formEditProfileValidator = new FormValidator(
-  {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__button',
-    inactiveButtonClass: 'form__botton_type_no-validate',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-  },
+  config,
     document.querySelector('#form-profile')
   );
 formEditProfileValidator.enableValidation();
 
 const formCreationCardValidator = new FormValidator(
-  {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__button',
-    inactiveButtonClass: 'form__botton_type_no-validate',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-  },
+  config,
     document.querySelector('#form-card')
 );
 formCreationCardValidator.enableValidation();
@@ -133,13 +128,6 @@ function openOverlayCardClick() {
   formCreationCardValidator.resetValidationform();
 };
 addButton.addEventListener('click', openOverlayCardClick);
-
-//функция делания кнопки неактивной
-function deactiveButton() {
-  console.log('tut');
-  overlayCardOpen.querySelector('.form__button').classList.add('form__botton_type_no-validate');
-  overlayCardOpen.querySelector('.form__button').disabled = true;
-};
 
 //функция сохранения имени и рода деятельности
 function saveFormSubmitProfileHandler(evt) {
