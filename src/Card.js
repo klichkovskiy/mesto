@@ -1,5 +1,7 @@
-import openPopup from './index.js'
-export default class Card {
+import { PopupWithImage } from './PopupWithImage.js'
+const imagePopup = new PopupWithImage('#overlay-image');
+
+export class Card {
   constructor(data, templateSelector) {
     this._name = data.name;
     this._link = data.link;
@@ -30,7 +32,7 @@ export default class Card {
   _setEventListeners() {
     this._buttonLike.addEventListener('click', () => this._handleLikeClick());
     this._buttonDelete.addEventListener('click', () => this._handleRemoveClick());
-    this._cardImage.addEventListener('click', () => this._handleOpenImage());
+    this._cardImage.addEventListener('click', () => this._handleCardClick());
   }
 
   _handleLikeClick() {
@@ -41,11 +43,8 @@ export default class Card {
     this._cardElement.remove();
   };
   
-  _handleOpenImage() {
-    openPopup(this._overlayImage);
-    this._overlayImageName.textContent = this._name;
-    this._overlayImageItem.src = this._link;
-    this._overlayImageItem.alt = this._name;
+  _handleCardClick() {
+    imagePopup.open(this._name, this._link);
   };
   
   renderCard() {
