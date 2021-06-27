@@ -30,8 +30,6 @@ const userInfoData = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm('#overlay-profile', (inpitValues) => {
-  {inpitValues.name = fieldNameEditProfile.value,
-  inpitValues.caption = fieldCaptionEditProfile.value}
   userInfoData.setUserInfo(inpitValues)
   editProfilePopup.close();
 });
