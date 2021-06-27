@@ -1,11 +1,9 @@
-import { PopupWithImage } from './PopupWithImage.js'
-const imagePopup = new PopupWithImage('#overlay-image');
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, imageCalback) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._imageCalback = imageCalback;
 
     this._overlayImage = document.querySelector('#overlay-image');
     this._overlayImageName = this._overlayImage.querySelector('.overlay__name');
@@ -44,7 +42,7 @@ export class Card {
   };
   
   _handleCardClick() {
-    imagePopup.open(this._name, this._link);
+    this._imageCalback(this._name, this._link);
   };
   
   renderCard() {

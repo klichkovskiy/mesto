@@ -10,7 +10,9 @@ import { editButton, addButton, fieldNameEditProfile, fieldCaptionEditProfile, c
 const cardSection = new Section({
   items: initialCards,
   renderer: (cardData) => {
-    const card = new Card(cardData, cardSelector);
+    const card = new Card(cardData, cardSelector, (name, link) => {
+      openImagePopup.open(name, link);
+    } );
     return card.renderCard()
   }
 }, '.cards');
@@ -27,11 +29,10 @@ const userInfoData = new UserInfo({
   captionSelector: '.profile__caption'
 });
 
-const editProfilePopup = new PopupWithForm('#overlay-profile', () => {
-  userInfoData.setUserInfo({
-    name: fieldNameEditProfile.value,
-    caption: fieldCaptionEditProfile.value
-  })
+const editProfilePopup = new PopupWithForm('#overlay-profile', (inpitValues) => {
+  {inpitValues.name = fieldNameEditProfile.value,
+  inpitValues.caption = fieldCaptionEditProfile.value}
+  userInfoData.setUserInfo(inpitValues)
   editProfilePopup.close();
 });
 editProfilePopup.setEventListeners()
