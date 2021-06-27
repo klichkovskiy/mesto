@@ -4,15 +4,12 @@ export class PopupWithForm extends Popup {
   constructor(popupSelector, submitCalback) {
     super(popupSelector);
     this._submitCalback = submitCalback;
-
     this._formElement = this.popupElement.querySelector('.form');
-    this._fieldNameNewCard = this._formElement.querySelector('#name-card');
-    this._fieldLinkNewCard = this._formElement.querySelector('#link-card');
   }
 
   close() {
     super.close();
-    document.querySelector('#form-card').reset();
+    this._formElement.reset();
   }
 
   _getInputValues() {
