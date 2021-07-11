@@ -1,38 +1,16 @@
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const editButtonAvatar = document.querySelector('.profile__avatar-edit');
+const deleteButtonCard = document.querySelector('.card__delete');
+
 
 const formEditProfile = document.forms['form-edit-profile'];
 const fieldNameEditProfile = formEditProfile.elements['name-profile'];
 const fieldCaptionEditProfile = formEditProfile.elements['caption-profile'];
 
-const cardSelector = '#new-card';
+const avatarImg = document.querySelector('.profile__img');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const cardSelector = '#new-card';
 
 const config = {
   formSelector: '.form',
@@ -43,5 +21,15 @@ const config = {
   errorClass: 'form__input-error_active'
 }
 
-export { editButton, addButton, fieldNameEditProfile, fieldCaptionEditProfile, cardSelector, initialCards, config }
+const option = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    authorization: '9252beac-87a5-4b6e-9188-e311a20289a2',
+    'Content-Type': 'application/json'
+  }
+}
 
+export {
+  editButton, addButton, editButtonAvatar, deleteButtonCard, fieldNameEditProfile,
+  fieldCaptionEditProfile, avatarImg, cardSelector, config, option
+}

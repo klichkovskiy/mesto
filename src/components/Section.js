@@ -9,11 +9,15 @@ export class Section {
   
   rendererAll() {
     this._items.forEach(item => {
-      this.addItem(item)
+      this.addItemAppend(item)
     });
   }
 
-  addItem(element) { 
+  addItemAppend(element) { 
+    this._element.append(this._renderer(element));
+  }
+
+  addItemPrepend(element) { 
     this._element.prepend(this._renderer(element));
   }
 }

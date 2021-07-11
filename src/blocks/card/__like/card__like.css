@@ -1,6 +1,8 @@
 .card__like{
   grid-column-start: 2;
   grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
   padding: 0;
   background: url(../../../image/like.svg);
   background-size: cover;
@@ -9,7 +11,7 @@
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
-  justify-self: end;
+  justify-self: center;
   align-self: center;
   transition: 0.3s ease-in-out;
 }
