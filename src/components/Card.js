@@ -34,100 +34,37 @@ export class Card {
       this._buttonDelete.classList.add('card__delete_hidden');
     }
 
-    this.renderLikes123(this._data);
-
-
+    this.renderLikes(this._data)
   }
 
-  renderLikes() {
-    this.counterLikes();
-    if (this._likes.find(item => { return item._id === this._userId })) {
-      this.addLikes()
-    } else {
-      this.removeLikes()
-    }
-  }
-
-
-  renderLikes123(data) {
-    this.counterLikes123(data);
+  renderLikes(data) {
+    this.counterLikes(data);
     if (data.likes.find(item => { return item._id === this._userId })) {
-      this.addLikes123()
+      this._addLikes()
     } else {
-      this.removeLikes123()
+      this._removeLikes()
     }
   }
 
-  counterLikes123(data) {
+  counterLikes(data) {
     if (data.likes.length > 0) {
       this._counterLikes.textContent = data.likes.length;
     }
   }
 
-  addLikes123() {
+  _addLikes() {
     this._buttonLike.classList.add('card__like_aktive');
   }
 
-  removeLikes123() {
+  _removeLikes() {
     this._buttonLike.classList.remove('card__like_aktive');
   }
-
-
-
-
-  counterLikes() {
-    if (this._likes.length > 0) {
-      this._counterLikes.textContent = this._likes.length;
-    }
-  }
-
-  addLikes() {
-    this._buttonLike.classList.add('card__like_aktive');
-  }
-
-  removeLikes() {
-    this._buttonLike.classList.remove('card__like_aktive');
-  }
-
 
   _setEventListeners() {
     this._buttonLike.addEventListener('click', () => this._handleLikeClick());
     this._buttonDelete.addEventListener('click', () => this._handleDeleteClick(this._cardElement));
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
-
-  //_handleLikeClick() {
-  //  const arrayfromLikes = Array.from(this._likes);
-  //  if (arrayfromLikes.forEach(element => {
-  //    element._id === !this._userId;
-  //  })) {
-  //    api.dislikeCard(this._idCard)
-  //      .then(a => {
-  //        console.log(a);
-  //        this._buttonLike.classList.remove('card__like_aktive');
-  //        this._counterLikes.textContent = this._likes.length;
-  //      })
-  //  } else {
-  //    api.likeCard(this._idCard)
-  //      .then(a => {
-  //        console.log(a);
-  //        this._buttonLike.classList.add('card__like_aktive');
-  //        this._counterLikes.textContent = this._likes.length;
-  //      })
-  //  }
-  //};
-
-  //_handleRemoveClick() {
-  //  //evt.preventDefault();
-  //  this._overlayDeleteCard.classList.add('overlay_opened');
-  //  this._buttonDeleteCard.addEventListener('click', (evt) => {
-  //    evt.preventDefault();
-  //    this._cardElement.remove();
-  //    this._handleRemoveClickCard();
-  //    api.delCard(this._idCard);
-  //    formDeleteCard.close();
-  //  });
-  //};
 
   renderCard() {
     this._createElement();

@@ -13,8 +13,6 @@ import {
   fieldCaptionEditProfile, avatarImg, cardSelector, config, option
 } from '../utils/constants.js';
 
-
-
 const api = new Api(option)
 
 const userInfoData = new UserInfo({
@@ -25,73 +23,25 @@ const userInfoData = new UserInfo({
 
 const cardSection = new Section({
   renderer: (cardData) => {
-    //console.log(cardData);
     return createCard(cardData);
   }
 }, '.cards');
 
-const createCard = (cardData) => {
-  const card = new Card(cardData, cardSelector, userId,
-    {
-      handleCardClick: (name, link) => {
-        openImagePopup.open(name, link);
-      },
-      
-      handleLikeClick: () => {
-        const result = cardData.likes.find((item) => { return item._id === userId }) ? api.dislikeCard(cardData._id) : api.likeCard(cardData._id)
-        result
-          .then((data) => {
-            console.log(data.likes.length);
-            //card.removeLikes();
-            //card.counterLikes();
-            card.renderLikes123(data);
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      },
 
-      handleDeleteClick: (cardElement) => {
-        formDeleteCard.open();
-        overlayDeleteCard.addEventListener('submit', () => {
-          api.delCard(cardData._id)
-            .then(() => {
-              cardElement.remove();
-              formDeleteCard.renderLoading();
-              formDeleteCard.close();
-            })
-            .catch((err) => {
-              console.log(err);
-            })
-        })
-
-      }
-    }
-  )
-
-  return card.renderCard()
-}
 
 const formDeleteCard = new PopupWithForm('#overlay-delete-card', () => {
 
 })
 formDeleteCard.setEventListeners()
 
-
-
-
-
-
 //промис на получение данных о пользователях и отрисовке карточек
 Promise.all([api.getInfoUser(), api.getListCard()])
   .then(data => {
     const [userData, cardData] = data;
     userId = userData._id;
-    //console.log(userId);
     userInfoData.setUserInfo(userData);
     cardSection.rendererAll(cardData);
   })
-
 
 //функция добавления карточки
 const addCardPopup = new PopupWithForm('#overlay-card', (cardData) => {
@@ -108,7 +58,6 @@ const addCardPopup = new PopupWithForm('#overlay-card', (cardData) => {
     })
 });
 addCardPopup.setEventListeners()
-
 
 //функция редактирования профиля
 const editProfilePopup = new PopupWithForm('#overlay-profile', (inpitValues) => {
@@ -143,13 +92,43 @@ const formAvatar = new PopupWithForm('#overlay-avatar', (avatarLink) => {
 formAvatar.setEventListeners()
 
 
+const createCard = (cardData) => {
+  const card = new Card(cardData, cardSelector, userId,
+    {
+      handleCardClick: (name, link) => {
+        openImagePopup.open(name, link);
+      },
 
+      handleLikeClick: () => {
+        const result = cardData.likes.find((item) => { return item._id === userId }) ? api.dislikeCard(cardData._id) : api.likeCard(cardData._id)
+        result
+          .then((data) => {
+            card.renderLikes(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      },
 
+      handleDeleteClick: (cardElement) => {
+        formDeleteCard.open();
+        overlayDeleteCard.addEventListener('submit', () => {
+          api.delCard(cardData._id)
+            .then(() => {
+              cardElement.remove();
+              formDeleteCard.renderLoading();
+              formDeleteCard.close();
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        })
+      }
+    }
+  )
 
-
-
-
-
+  return card.renderCard()
+}
 
 //Открытие полноразмерных картинок
 const openImagePopup = new PopupWithImage('#overlay-image');

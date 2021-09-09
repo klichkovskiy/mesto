@@ -42,7 +42,6 @@ export class PopupWithForm extends Popup {
       evt.preventDefault();
       const cardData = this._getInputValues();
       this._submitCalback(cardData);
-      //console.log(cardData);
     });
   }
 }
