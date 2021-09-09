@@ -4,44 +4,42 @@ export class Api {
     this._headers = config.headers;
   }
 
-  //получение массива загруженных карточек на сервере
-  listCard() {
-    return fetch(`${this._url}${'/cards'}`, {
-      headers: this._headers,
-      method: 'GET'
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+  _checkResponse(res) {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   //получение информации о пользователе
-  infoUser() {
+  getInfoUser() {
     return fetch(`${this._url}${'/users/me'}`, {
       headers: this._headers,
       method: 'GET'
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
+  }
+
+  //получение массива загруженных карточек на сервере
+  getListCard() {
+    return fetch(`${this._url}${'/cards'}`, {
+      headers: this._headers,
+      method: 'GET'
+    })
+      .then(this._checkResponse)
   }
 
   //редактирование информации о профиле
-  infoUserPatch(name, about) {
-    fetch(`${this._url}${'/users/me'}`, {
+  patchInfoUser(name, about) {
+    return fetch(`${this._url}${'/users/me'}`, {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({
         name: name,
         about: about
       })
-    });
+    })
+    .then(this._checkResponse)
   }
 
   //добавление карточки
@@ -54,65 +52,46 @@ export class Api {
         link: link
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse)
   }
 
   //удаление карточки
   delCard(cardId) {
-    fetch(`${this._url}${'/cards/'}${cardId}`, {
+    return fetch(`${this._url}${'/cards/'}${cardId}`, {
       headers: this._headers,
       method: 'DELETE',
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 
   //редактирование аватара
   editAvatar(linkAvatar) {
-    fetch(`${this._url}${'/users/me/avatar'}`, {
+    return fetch(`${this._url}${'/users/me/avatar'}`, {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({
         avatar: linkAvatar
       })
     })
+    .then(this._checkResponse)
   }
 
   //постановка лайка карточки
   likeCard(cardId) {
-    fetch(`${this._url}${'/cards/likes/'}${cardId}`, {
+    return fetch(`${this._url}${'/cards/likes/'}${cardId}`, {
       headers: this._headers,
       method: 'PUT'
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse)
   }
 
   //постановка лайка карточки
   dislikeCard(cardId) {
-    fetch(`${this._url}${'/cards/likes/'}${cardId}`, {
+    return fetch(`${this._url}${'/cards/likes/'}${cardId}`, {
       headers: this._headers,
       method: 'DELETE'
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(this._checkResponse)
   }
 
   

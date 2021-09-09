@@ -1,7 +1,8 @@
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const editButtonAvatar = document.querySelector('.profile__avatar-edit');
-const deleteButtonCard = document.querySelector('.card__delete');
+
+const overlayDeleteCard = document.querySelector('#overlay-delete-card');
 
 
 const formEditProfile = document.forms['form-edit-profile'];
@@ -22,14 +23,16 @@ const config = {
 }
 
 const option = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-27',
+  //baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',//старый
   headers: {
-    authorization: '9252beac-87a5-4b6e-9188-e311a20289a2',
+    authorization: '1d881064-beb8-48f1-8794-0734b420344c',
+    //authorization: '9252beac-87a5-4b6e-9188-e311a20289a2',//старый
     'Content-Type': 'application/json'
   }
 }
 
 export {
-  editButton, addButton, editButtonAvatar, deleteButtonCard, fieldNameEditProfile,
+  editButton, addButton, editButtonAvatar, overlayDeleteCard, fieldNameEditProfile,
   fieldCaptionEditProfile, avatarImg, cardSelector, config, option
 }

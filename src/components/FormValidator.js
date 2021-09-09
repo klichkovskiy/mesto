@@ -43,11 +43,10 @@ export class FormValidator {
     return this._inputList.some(inputElement => !inputElement.validity.valid)
   }
 
-  resetValidationform() {
+  resetValidation() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
       this.toggleButtonState();
-      document.querySelector(this._config.formSelector).reset();
   })
 }
 
