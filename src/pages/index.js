@@ -100,10 +100,13 @@ const createCard = (cardData) => {
       },
 
       handleLikeClick: () => {
-        const result = cardData.likes.find((item) => { return item._id === userId }) ? api.dislikeCard(cardData._id) : api.likeCard(cardData._id)
+        const result = card.likesCounter()
+          ? api.dislikeCard(cardData._id)
+          : api.likeCard(cardData._id)
         result
-          .then((data) => {
-            card.renderLikes(data);
+          .then(data => {
+            card.setLike(data.likes)
+            card.renderLikes(data.likes);
           })
           .catch((err) => {
             console.log(err);
@@ -118,6 +121,7 @@ const createCard = (cardData) => {
               cardElement.remove();
               formDeleteCard.renderLoading();
               formDeleteCard.close();
+
             })
             .catch((err) => {
               console.log(err);

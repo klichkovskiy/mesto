@@ -34,22 +34,20 @@ export class Card {
       this._buttonDelete.classList.add('card__delete_hidden');
     }
 
-    this.renderLikes(this._data)
+    this.renderLikes()
   }
 
-  renderLikes(data) {
-    this.counterLikes(data);
-    if (data.likes.find(item => { return item._id === this._userId })) {
+  renderLikes() {
+    this._counterLikes.textContent = this._likes.length;
+    if (this.likesCounter()) {
       this._addLikes()
     } else {
       this._removeLikes()
     }
   }
 
-  counterLikes(data) {
-    if (data.likes.length > 0) {
-      this._counterLikes.textContent = data.likes.length;
-    }
+  likesCounter() {
+    return this._likes.find(item => { return item._id === this._userId })
   }
 
   _addLikes() {
@@ -58,6 +56,10 @@ export class Card {
 
   _removeLikes() {
     this._buttonLike.classList.remove('card__like_aktive');
+  }
+
+  setLike(list) {
+    this._likes = list;
   }
 
   _setEventListeners() {

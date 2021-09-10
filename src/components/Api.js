@@ -93,6 +93,4 @@ export class Api {
     })
     .then(this._checkResponse)
   }
-
-  
 }
