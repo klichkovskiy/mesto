@@ -79,7 +79,7 @@ editProfilePopup.setEventListeners()
 const formAvatar = new PopupWithForm('#overlay-avatar', (avatarLink) => {
   api.editAvatar(avatarLink.link)
     .then(dataAvatar => {
-      avatarImg.src = dataAvatar.avatar
+      userInfoData.setUserAvatar(dataAvatar.avatar);
       formAvatar.close();
     })
     .catch((err) => {
@@ -106,22 +106,22 @@ const createCard = (cardData) => {
         result
           .then(data => {
             card.setLike(data.likes)
-            card.renderLikes(data.likes);
+            card.renderLikes();
           })
           .catch((err) => {
             console.log(err);
           })
       },
 
-      handleDeleteClick: (cardElement) => {
+      handleDeleteClick: () => {
         formDeleteCard.open();
         overlayDeleteCard.addEventListener('submit', () => {
           api.delCard(cardData._id)
             .then(() => {
-              cardElement.remove();
+              card.deleteCard();
+              //cardElement.remove();
               formDeleteCard.renderLoading();
               formDeleteCard.close();
-
             })
             .catch((err) => {
               console.log(err);

@@ -13,10 +13,18 @@ export class UserInfo {
     }
   }
 
+  setUserAvatar(avatar) {
+    if (avatar) {
+      this._avatar.src = avatar;
+    }
+  }
+
   setUserInfo(data) {
-    this._name.textContent = data.name;
-    this._caption.textContent = data.about;
-    this._avatar.src = data.avatar;
-    this._id = data._id;
+    if (data.name && data.about && data.avatar && data._id) {
+      this._name.textContent = data.name;
+      this._caption.textContent = data.about;
+      this._avatar.src = data.avatar;
+      this._id = data._id;
+    }
   }
 }

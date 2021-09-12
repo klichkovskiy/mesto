@@ -11,10 +11,15 @@ export class PopupWithForm extends Popup {
 
   open() {
     super.open();
-    if (this._button.textContent.substr(-3,3) === '...'){
-      this._button.textContent = this._button.textContent.slice(0, -3);
+    if (this._button.textContent === 'Сохранение...') {
+      this._button.textContent = 'Сохранить';
     }
-    
+    else if (this._button.textContent === 'Создание...') {
+      this._button.textContent = 'Создать';
+    }
+    else if (this._button.textContent === 'Удаление...') {
+      this._button.textContent = 'Да';
+    }
   }
 
   close() {
@@ -25,7 +30,7 @@ export class PopupWithForm extends Popup {
   _getInputValues() {
     const result = {};
 
-    this._inputs.forEach( input => {
+    this._inputs.forEach(input => {
       result[input.name] = input.value;
     });
 
@@ -33,7 +38,13 @@ export class PopupWithForm extends Popup {
   }
 
   renderLoading() {
-    this._button.textContent = this._button.textContent + '...';
+    if (this._button.textContent === 'Сохранить') {
+      this._button.textContent = 'Сохранение...';
+    } else if (this._button.textContent === 'Создать') {
+      this._button.textContent = 'Создание...';
+    } else if (this._button.textContent === 'Да') {
+      this._button.textContent = 'Удаление...';
+    }
   }
 
   setEventListeners() {
